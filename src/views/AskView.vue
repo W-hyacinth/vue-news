@@ -1,7 +1,7 @@
 <template>
   <main>
     Ask
-    <div v-for="(item, index) in users" :key="index+1">
+    <div v-for="(item, index) in asks" :key="index+1">
       {{ item }}
     </div>
   </main>
@@ -12,13 +12,13 @@ export default {
   name: 'AskView',
   data () {
     return {
-      users: []
+      asks: []
     }
   },
   created() {
     fetchAskList()
       .then((response) => {
-        this.users = response.data
+        this.asks = response.data
       }).catch((error) => {
         console.warn(error)
       })

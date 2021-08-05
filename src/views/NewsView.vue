@@ -1,7 +1,7 @@
 <template>
   <main>
     News
-    <div v-for="(item, index) in users" :key="index+1">
+    <div v-for="(item, index) in news" :key="index+1">
       {{ item }}
     </div>
   </main>
@@ -13,13 +13,13 @@ export default {
   name: 'NewsView',
   data () {
     return {
-      users: []
+      news: []
     }
   },
   created () {
     fetchNewsList()
       .then((response) => {
-        this.users = response.data
+        this.news = response.data
       })
       .catch((error) => {
         console.warn(error)

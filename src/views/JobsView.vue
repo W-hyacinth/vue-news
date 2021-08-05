@@ -1,7 +1,7 @@
 <template>
   <main>
     Jobs
-    <div v-for="(item, index) in users" :key="index+1">
+    <div v-for="(item, index) in jobs" :key="index+1">
       {{ item }}
     </div>
   </main>
@@ -12,13 +12,13 @@ export default {
   name: 'JobsView',
   data () {
     return {
-      users: []
+      jobs: []
     }
   },
   created() {
     fetchJobsList()
       .then((response) => {
-        this.users = response.data
+        this.jobs = response.data
       }).catch((error) => {
       console.warn(error)
     })
