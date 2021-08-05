@@ -3,7 +3,7 @@
     <header class="hacker__header">
       <ToolBar />
     </header>
-    <router-view />
+    <router-view id="main" />
   </div>
 </template>
 
@@ -23,6 +23,9 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+#main {
+  flex: 1 1 auto;
 }
 .hacker__header {
   background-color: #42b883;
