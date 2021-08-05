@@ -15,7 +15,7 @@ export default {
       asks: []
     }
   },
-  created() {
+  created () {
     fetchAskList()
       .then((response) => {
         this.asks = response.data

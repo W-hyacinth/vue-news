@@ -15,13 +15,13 @@ export default {
       jobs: []
     }
   },
-  created() {
+  created () {
     fetchJobsList()
       .then((response) => {
         this.jobs = response.data
       }).catch((error) => {
-      console.warn(error)
-    })
+        console.warn(error)
+      })
   }
 }
 </script>
