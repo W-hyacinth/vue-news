@@ -7,21 +7,16 @@
   </main>
 </template>
 <script>
-import {fetchAskList} from '../api'
+import { mapState } from 'vuex'
 export default {
   name: 'AskView',
-  data () {
-    return {
-      asks: []
-    }
+  computed: {
+    ...mapState({
+      asks: state => state.asks
+    })
   },
   created () {
-    fetchAskList()
-      .then((response) => {
-        this.asks = response.data
-      }).catch((error) => {
-        console.warn(error)
-      })
+    this.$store.dispatch('FETCH_ASKS')
   }
 }
 </script>

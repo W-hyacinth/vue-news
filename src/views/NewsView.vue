@@ -7,23 +7,16 @@
   </main>
 </template>
 <script>
-import { fetchNewsList } from '../api'
-
+import { mapState } from 'vuex'
 export default {
   name: 'NewsView',
-  data () {
-    return {
-      news: []
-    }
+  computed: {
+    ...mapState({
+      news: state => state.news
+    })
   },
   created () {
-    fetchNewsList()
-      .then((response) => {
-        this.news = response.data
-      })
-      .catch((error) => {
-        console.warn(error)
-      })
+    this.$store.dispatch('FETCH_NEWS')
   }
 }
 </script>
