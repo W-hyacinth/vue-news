@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {fetchNewsList, fetchJobsList, fetchAskList, fetchUserData} from '../api'
+import {fetchNewsList, fetchJobsList, fetchAskList, fetchUserData, fetchItemData} from '../api'
 
 Vue.use(Vuex)
 
@@ -9,7 +9,16 @@ export const store = new Vuex.Store({
     news: [],
     asks: [],
     jobs: [],
-    user: {}
+    user: {},
+    item: []
+  },
+  getters: {
+    fetchedAsk (state) {
+      return state.asks
+    },
+    fetchedItem (state) {
+      return state.item
+    }
   },
   mutations: {
     SET_NEWS (state, payload) {
@@ -23,6 +32,9 @@ export const store = new Vuex.Store({
     },
     SET_USER (state, payload) {
       state.user = payload
+    },
+    SET_ITEM (state, payload) {
+      state.item = payload
     }
   },
   actions: {
@@ -63,6 +75,15 @@ export const store = new Vuex.Store({
           context.commit('SET_USER', response.data)
         }).catch((error) => {
           alert(error)
+          console.error(error)
+          window.history.back()
+        })
+    },
+    FETCH_ITEMS (context, itemId) {
+      fetchItemData(itemId)
+        .then((response) => {
+          context.commit('SET_ITEM', response.data)
+        }).catch((error) => {
           console.error(error)
           window.history.back()
         })

@@ -21,6 +21,14 @@ export default new Router({
       component: () => import('@/views/AskView.vue')
     },
     {
+      path: '/ask/item',
+      name: 'ItemView',
+      component: () => import('@/views/ItemView.vue'),
+      props: (route) => ({
+        query: route.query.id
+      })
+    },
+    {
       path: '/jobs',
       name: 'JobsView',
       component: () => import('@/views/JobsView.vue')

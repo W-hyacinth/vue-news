@@ -1,9 +1,12 @@
 <template>
   <div id="app">
     <header class="hacker__header">
+      <h1 class="ally">HACKER NEWS</h1>
       <ToolBar />
     </header>
-    <router-view id="main" />
+    <transition name="fade" mode="out-in">
+      <router-view id="main" :key="$route.name" />
+    </transition>
   </div>
 </template>
 
@@ -28,6 +31,14 @@ export default {
   position: absolute;
   width: 1px;
 }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>
 <style lang="scss" scoped>
 #app {
@@ -37,7 +48,8 @@ export default {
 }
 #main {
   flex: 1 1 auto;
-  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
 }
 .hacker__header {
   background-color: #42b883;

@@ -2,28 +2,26 @@
   <main>
     Ask
     <ul class="hacker__list">
-      <li class="hacker__item" v-for="(item, index) in asks" :key="index+1">
-        <a :href="item.url" class="hacker__link">
+      <li class="hacker__item" v-for="(item, index) in fetchedAsk" :key="index+1">
+        <router-link :to="`/ask/item?id=${item.id}`" class="hacker__link">
           {{ item.title }}
-        </a>
+        </router-link>
         <div class="hacker__user">
           {{ userInfo(item.points) }}
           <router-link v-if="item.user" :to="`/user/${item.user}`">{{item.user}}</router-link>
           <span class="hacker__time">{{ item.time_ago }}</span>
-          <router-link v-if="item.comment_count" :to="`/${index+1}`">{{comments(item.comments_count)}}</router-link>
+          <router-link v-if="item.comment_count" :to="`/ask/item?id=${item.id}`">{{comments(item.comments_count)}}</router-link>
         </div>
       </li>
     </ul>
   </main>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name: 'AskView',
   computed: {
-    ...mapState({
-      asks: state => state.asks
-    })
+    ...mapGetters(['fetchedAsk'])
   },
   methods: {
     points (val) {

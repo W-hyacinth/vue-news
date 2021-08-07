@@ -39,6 +39,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+#main {
+  padding: 20px 16px;
+}
 .hacker-user {
   &__table,
   &__rowgroup,
