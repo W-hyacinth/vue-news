@@ -24,6 +24,11 @@ export default new Router({
       path: '/jobs',
       name: 'JobsView',
       component: () => import('@/views/JobsView.vue')
+    },
+    {
+      path: '/user/:id',
+      name: 'UserView',
+      component: () => import('@/views/UserView.vue')
     }
   ]
 })

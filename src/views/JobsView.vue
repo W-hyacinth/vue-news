@@ -9,7 +9,7 @@
         <span class="hacker__domain">{{item.domain}}</span>
         <div class="hacker__user">
           {{ userInfo(item.points) }}
-          <router-link v-if="item.user" :to="`/${index+1}`">{{item.user}}</router-link>
+          <router-link v-if="item.user" :to="`/user/${item.user}`">{{item.user}}</router-link>
           <span class="hacker__time">{{ item.time_ago }}</span>
         </div>
       </li>

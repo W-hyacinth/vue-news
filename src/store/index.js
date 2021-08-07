@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {fetchNewsList, fetchJobsList, fetchAskList} from '../api'
+import {fetchNewsList, fetchJobsList, fetchAskList, fetchUserData} from '../api'
 
 Vue.use(Vuex)
 
@@ -8,7 +8,8 @@ export const store = new Vuex.Store({
   state: {
     news: [],
     asks: [],
-    jobs: []
+    jobs: [],
+    user: {}
   },
   mutations: {
     SET_NEWS (state, payload) {
@@ -19,6 +20,9 @@ export const store = new Vuex.Store({
     },
     SET_JOBS (state, payload) {
       state.jobs = payload
+    },
+    SET_USER (state, payload) {
+      state.user = payload
     }
   },
   actions: {
@@ -28,7 +32,9 @@ export const store = new Vuex.Store({
           context.commit('SET_NEWS', response.data)
         })
         .catch((error) => {
-          console.warn(error)
+          alert(error)
+          console.error(error)
+          window.history.back()
         })
     },
     FETCH_ASKS (context) {
@@ -36,7 +42,9 @@ export const store = new Vuex.Store({
         .then((response) => {
           context.commit('SET_ASKS', response.data)
         }).catch((error) => {
-          console.warn(error)
+          alert(error)
+          console.error(error)
+          window.history.back()
         })
     },
     FETCH_JOBS (context) {
@@ -44,7 +52,19 @@ export const store = new Vuex.Store({
         .then((response) => {
           context.commit('SET_JOBS', response.data)
         }).catch((error) => {
-          console.warn(error)
+          alert(error)
+          console.error(error)
+          window.history.back()
+        })
+    },
+    FETCH_USER (context, userId) {
+      fetchUserData(userId)
+        .then((response) => {
+          context.commit('SET_USER', response.data)
+        }).catch((error) => {
+          alert(error)
+          console.error(error)
+          window.history.back()
         })
     }
   }
