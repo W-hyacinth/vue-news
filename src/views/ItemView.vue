@@ -40,9 +40,6 @@ export default {
   },
   computed: {
     ...mapGetters(['fetchedItem']),
-    // ...mapState({
-    //   item: state => state.item
-    // }),
     comments () {
       return this.fetchedItem.comments.filter(e => !e.deleted)
     }
