@@ -9,7 +9,12 @@ export const store = new Vuex.Store({
     news: [],
     asks: [],
     jobs: [],
-    user: {},
+    user: {
+      name: '',
+      created: '',
+      karma: '',
+      about: ''
+    },
     item: []
   },
   getters: {
@@ -31,7 +36,10 @@ export const store = new Vuex.Store({
       state.jobs = payload
     },
     SET_USER (state, payload) {
-      state.user = payload
+      state.user.name = payload.id
+      state.user.created = payload.created
+      state.user.karma = payload.karma
+      state.user.about = payload.about
     },
     SET_ITEM (state, payload) {
       state.item = payload

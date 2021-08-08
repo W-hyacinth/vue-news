@@ -127,16 +127,12 @@ export default {
   }
 }
 @media screen and (min-width: 769px) {
-  .hacker {
-    &__list {
-      &--order {
-        .hacker__item {
-          &:before {
-            width: 50px;
-            height: 50px;
-            font-size: 24px;
-          }
-        }
+  .hacker__list--order {
+    .hacker__item {
+      &:before {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
       }
     }
   }

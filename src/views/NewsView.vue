@@ -13,14 +13,6 @@ export default {
       news: state => state.news
     })
   },
-  methods: {
-    points (val) {
-      return val > 1 ? `points` : `point`
-    },
-    pointsInfo (val) {
-      return val ? `${val} ${this.points(val)} by` : ''
-    }
-  },
   created () {
     this.$store.dispatch('FETCH_NEWS')
   },
