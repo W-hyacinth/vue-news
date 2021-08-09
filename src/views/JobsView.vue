@@ -4,17 +4,20 @@
   </main>
 </template>
 <script>
-import { mapState } from 'vuex'
+import {mapActions, mapState} from 'vuex'
 import ListItem from '@/components/ListItem'
 export default {
   name: 'JobsView',
+  methods: {
+    ...mapActions({ FETCH_JOBS: 'hackerStore/FETCH_JOBS' })
+  },
   computed: {
     ...mapState({
-      jobs: state => state.jobs
+      jobs: state => state.hackerStore.jobs
     })
   },
   created () {
-    this.$store.dispatch('FETCH_JOBS')
+    this.FETCH_JOBS()
   },
   components: {
     ListItem

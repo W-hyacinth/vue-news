@@ -27,7 +27,7 @@
   </main>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 export default {
   name: 'ItemView',
   methods: {
@@ -39,14 +39,14 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['fetchedItem']),
+    ...mapGetters({fetchedItem: 'hackerStore/fetchedItem'}),
     comments () {
       return this.fetchedItem.comments.filter(e => !e.deleted)
     }
   },
   created () {
     const itemId = this.$route.query.id
-    this.$store.dispatch('FETCH_ITEMS', itemId)
+    this.$store.dispatch('hackerStore/FETCH_ITEMS', itemId)
   }
 }
 </script>

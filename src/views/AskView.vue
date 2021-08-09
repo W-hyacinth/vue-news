@@ -4,17 +4,20 @@
   </main>
 </template>
 <script>
-import {mapState} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 import ListItem from '@/components/ListItem'
 export default {
   name: 'AskView',
+  methods: {
+    ...mapActions({ FETCH_ASKS: 'hackerStore/FETCH_ASKS' })
+  },
   computed: {
     ...mapState({
-      asks: state => state.asks
+      asks: state => state.hackerStore.asks
     })
   },
   created () {
-    this.$store.dispatch('FETCH_ASKS')
+    this.FETCH_ASKS()
   },
   components: {
     ListItem

@@ -4,17 +4,20 @@
   </main>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import ListItem from '@/components/ListItem'
 export default {
   name: 'NewsView',
+  methods: {
+    ...mapActions({ FETCH_NEWS: 'hackerStore/FETCH_NEWS' })
+  },
   computed: {
     ...mapState({
-      news: state => state.news
+      news: state => state.hackerStore.news
     })
   },
   created () {
-    this.$store.dispatch('FETCH_NEWS')
+    this.FETCH_NEWS()
   },
   components: {
     ListItem

@@ -10,12 +10,12 @@ export default {
   name: 'UserView',
   computed: {
     ...mapState({
-      user: state => state.user
+      user: state => state.hackerStore.user
     })
   },
   created () {
     const userName = this.$route.params.id
-    this.$store.dispatch('FETCH_USER', userName)
+    this.$store.dispatch('hackerStore/FETCH_USER', userName)
   },
   components: {
     UserTable
