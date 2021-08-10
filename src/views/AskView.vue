@@ -4,20 +4,24 @@
   </main>
 </template>
 <script>
-import {mapActions, mapState} from 'vuex'
+import {mapState} from 'vuex'
 import ListItem from '@/components/ListItem'
+import bus from '@/utils/bus'
 export default {
   name: 'AskView',
-  methods: {
-    ...mapActions({ FETCH_ASKS: 'hackerStore/FETCH_ASKS' })
-  },
   computed: {
     ...mapState({
       asks: state => state.hackerStore.asks
     })
   },
   created () {
-    this.FETCH_ASKS()
+    bus.$emit('start:spinner')
+    setTimeout(() => {
+      this.$store.dispatch('hackerStore/FETCH_ASKS')
+        .then(() => {
+          bus.$emit('end:spinner')
+        }).catch(error => { console.error(error) })
+    }, 3000)
   },
   components: {
     ListItem

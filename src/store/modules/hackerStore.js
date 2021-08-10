@@ -47,6 +47,7 @@ const hackerStore = {
       fetchNewsList()
         .then((response) => {
           context.commit('SET_NEWS', response.data)
+          return response
         })
         .catch((error) => {
           alert(error)

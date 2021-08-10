@@ -4,8 +4,9 @@
   </main>
 </template>
 <script>
-import UserTable from '@/components/UserTable'
 import { mapState } from 'vuex'
+import UserTable from '@/components/UserTable'
+import bus from '@/utils/bus'
 export default {
   name: 'UserView',
   computed: {
@@ -15,7 +16,13 @@ export default {
   },
   created () {
     const userName = this.$route.params.id
-    this.$store.dispatch('hackerStore/FETCH_USER', userName)
+    bus.$emit('start:spinner')
+    setTimeout(() => {
+      this.$store.dispatch('hackerStore/FETCH_USER', userName)
+        .then(() => {
+          bus.$emit('end:spinner')
+        }).catch(error => { console.error(error) })
+    }, 3000)
   },
   components: {
     UserTable

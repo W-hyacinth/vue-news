@@ -4,20 +4,24 @@
   </main>
 </template>
 <script>
-import {mapActions, mapState} from 'vuex'
+import {mapState} from 'vuex'
 import ListItem from '@/components/ListItem'
+import bus from '@/utils/bus'
 export default {
   name: 'JobsView',
-  methods: {
-    ...mapActions({ FETCH_JOBS: 'hackerStore/FETCH_JOBS' })
-  },
   computed: {
     ...mapState({
       jobs: state => state.hackerStore.jobs
     })
   },
   created () {
-    this.FETCH_JOBS()
+    bus.$emit('start:spinner')
+    setTimeout(() => {
+      this.$store.dispatch('hackerStore/FETCH_JOBS')
+        .then(() => {
+          bus.$emit('end:spinner')
+        }).catch(error => { console.error(error) })
+    }, 3000)
   },
   components: {
     ListItem

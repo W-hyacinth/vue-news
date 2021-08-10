@@ -6,6 +6,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import ListItem from '@/components/ListItem'
+import bus from '@/utils/bus'
 export default {
   name: 'NewsView',
   methods: {
@@ -17,7 +18,13 @@ export default {
     })
   },
   created () {
-    this.FETCH_NEWS()
+    bus.$emit('start:spinner')
+    setTimeout(() => {
+      this.$store.dispatch('hackerStore/FETCH_NEWS')
+        .then(() => {
+          bus.$emit('end:spinner')
+        }).catch(error => { console.error(error) })
+    }, 3000)
   },
   components: {
     ListItem

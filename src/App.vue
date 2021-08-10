@@ -7,15 +7,40 @@
     <transition name="fade" mode="out-in">
       <router-view id="main" :key="$route.name" />
     </transition>
+    <LoadingBox :isLoading="loadingStatus" />
   </div>
 </template>
 
 <script>
 import 'modern-normalize'
 import ToolBar from '@/components/ToolBar'
+import LoadingBox from '@/components/LoadingBox'
+import bus from '@/utils/bus'
 export default {
   name: 'App',
+  data () {
+    return {
+      loadingStatus: true
+    }
+  },
+  methods: {
+    startSpinner () {
+      this.loadingStatus = true
+    },
+    endSpinner () {
+      this.loadingStatus = false
+    }
+  },
+  created () {
+    bus.$on('start:spinner', this.startSpinner)
+    bus.$on('end:spinner', this.endSpinner)
+  },
+  beforeDestroy () {
+    bus.$off('start:spinner', this.startSpinner)
+    bus.$off('end:spinner', this.endSpinner)
+  },
   components: {
+    LoadingBox,
     ToolBar
   }
 }
