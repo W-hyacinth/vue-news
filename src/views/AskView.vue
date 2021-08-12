@@ -1,30 +1,16 @@
 <template>
   <main>
-    <ListItem :list="asks" listType="order" />
+    <ListItem :list="list" listType="order" />
   </main>
 </template>
 <script>
-import {mapState} from 'vuex'
 import ListItem from '@/components/ListItem'
-import bus from '@/utils/bus'
+import ListMixin from '../mixins/ListMixin'
 export default {
   name: 'AskView',
-  computed: {
-    ...mapState({
-      asks: state => state.hackerStore.asks
-    })
-  },
-  created () {
-    bus.$emit('start:spinner')
-    setTimeout(() => {
-      this.$store.dispatch('hackerStore/FETCH_ASKS')
-        .then(() => {
-          bus.$emit('end:spinner')
-        }).catch(error => { console.error(error) })
-    }, 3000)
-  },
   components: {
     ListItem
-  }
+  },
+  mixins: [ListMixin]
 }
 </script>

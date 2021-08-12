@@ -1,30 +1,16 @@
 <template>
   <main>
-    <ListItem :list="jobs" />
+    <ListItem :list="list" />
   </main>
 </template>
 <script>
-import {mapState} from 'vuex'
 import ListItem from '@/components/ListItem'
-import bus from '@/utils/bus'
+import ListMixin from '../mixins/ListMixin'
 export default {
   name: 'JobsView',
-  computed: {
-    ...mapState({
-      jobs: state => state.hackerStore.jobs
-    })
-  },
-  created () {
-    bus.$emit('start:spinner')
-    setTimeout(() => {
-      this.$store.dispatch('hackerStore/FETCH_JOBS')
-        .then(() => {
-          bus.$emit('end:spinner')
-        }).catch(error => { console.error(error) })
-    }, 3000)
-  },
   components: {
     ListItem
-  }
+  },
+  mixins: [ListMixin]
 }
 </script>

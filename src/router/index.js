@@ -12,12 +12,12 @@ export default new Router({
     },
     {
       path: '/news',
-      name: 'NewsView',
+      name: 'news',
       component: () => import('@/views/NewsView.vue')
     },
     {
       path: '/ask',
-      name: 'AskView',
+      name: 'ask',
       component: () => import('@/views/AskView.vue')
     },
     {
@@ -30,7 +30,7 @@ export default new Router({
     },
     {
       path: '/jobs',
-      name: 'JobsView',
+      name: 'jobs',
       component: () => import('@/views/JobsView.vue')
     },
     {
