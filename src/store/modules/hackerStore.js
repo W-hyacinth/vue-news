@@ -33,7 +33,7 @@ const hackerStore = {
   },
   actions: {
     FETCH_USER (context, userId) {
-      fetchUserData(userId)
+      return fetchUserData(userId)
         .then((response) => {
           context.commit('SET_USER', response.data)
         }).catch((error) => {
@@ -43,7 +43,7 @@ const hackerStore = {
         })
     },
     FETCH_ITEMS (context, itemId) {
-      fetchItemData(itemId)
+      return fetchItemData(itemId)
         .then((response) => {
           context.commit('SET_ITEM', response.data)
         }).catch((error) => {
@@ -52,10 +52,11 @@ const hackerStore = {
         })
     },
     FETCH_LISTS ({ commit }, pageName) {
-      fetchListData(pageName)
-        .then(
-          ({ data }) => commit('SET_LIST', data)
-        )
+      return fetchListData(pageName)
+        .then(response => {
+          commit('SET_LIST', response.data)
+          return response
+        })
         .catch((error) => {
           console.error(error)
           // window.history.back()
