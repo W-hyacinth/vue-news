@@ -10,11 +10,7 @@ export default {
       list: state => state.hackerStore.list
     })
   },
-  created () {
-    bus.$emit('start:spinner')
-    this.$store.dispatch('hackerStore/FETCH_LISTS', this.$route.name)
-      .then(() => {
-        bus.$emit('end:spinner')
-      }).catch(error => { console.error(error) })
+  mounted () {
+    bus.$emit('end:spinner')
   }
 }
