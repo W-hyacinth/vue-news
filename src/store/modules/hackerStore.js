@@ -32,35 +32,20 @@ const hackerStore = {
     }
   },
   actions: {
-    FETCH_USER (context, userId) {
-      return fetchUserData(userId)
-        .then((response) => {
-          context.commit('SET_USER', response.data)
-        }).catch((error) => {
-          alert(error)
-          console.error(error)
-          window.history.back()
-        })
+    async FETCH_USER ({commit}, userId) {
+      const response = await fetchUserData(userId)
+      commit('SET_USER', response.data)
+      return response
     },
-    FETCH_ITEMS (context, itemId) {
-      return fetchItemData(itemId)
-        .then((response) => {
-          context.commit('SET_ITEM', response.data)
-        }).catch((error) => {
-          console.error(error)
-          window.history.back()
-        })
+    async FETCH_ITEMS ({commit}, itemId) {
+      const response = await fetchItemData(itemId)
+      commit('SET_ITEM', response.data)
+      return response
     },
-    FETCH_LISTS ({ commit }, pageName) {
-      return fetchListData(pageName)
-        .then(response => {
-          commit('SET_LIST', response.data)
-          return response
-        })
-        .catch((error) => {
-          console.error(error)
-          // window.history.back()
-        })
+    async FETCH_LISTS ({commit}, pageName) {
+      const response = await fetchListData(pageName)
+      commit('SET_LIST', response.data)
+      return response
     }
   }
 }

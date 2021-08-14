@@ -3,7 +3,7 @@
     <li class="hacker__item" v-for="(item, index) in list" :key="index+1">
       <div class="hacker-info">
         <div class="hacker-info__title">
-          <template v-if="pageName === 'AskView'">
+          <template v-if="pageName === 'ask'">
             <router-link :to="`/ask/item?id=${item.id}`" class="hacker-info__link">{{ item.title }}</router-link>
           </template>
           <template v-else>

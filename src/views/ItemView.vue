@@ -14,7 +14,7 @@
         <h3 class="comment__title">댓글 {{ fetchedItem.comments_count }}</h3>
         <div v-for="(fetchedItem, index) in comments" :key="index+1" class="comment__item">
           <div class="comment__info">
-            <router-link :to="`/user/${fetchedItem.user}`">{{fetchedItem.user}}</router-link>
+            <router-link :to="`/user/${fetchedItem.user}`" class="comment__link">{{fetchedItem.user}}</router-link>
             <span class="comment__time">{{ fetchedItem.time_ago }}</span>
           </div>
           <div class="comment__contents" v-html="fetchedItem.content"></div>
@@ -28,6 +28,7 @@
 </template>
 <script>
 import {mapGetters} from 'vuex'
+import ListMixin from '../mixins/ListMixin'
 export default {
   name: 'ItemView',
   methods: {
@@ -44,10 +45,7 @@ export default {
       return this.fetchedItem.comments.filter(e => !e.deleted)
     }
   },
-  created () {
-    const itemId = this.$route.query.id
-    this.$store.dispatch('hackerStore/FETCH_ITEMS', itemId)
-  }
+  mixins: [ ListMixin ]
 }
 </script>
 <style lang="scss" scoped>
@@ -61,6 +59,11 @@ export default {
         margin-to: 0;
       }
     }
+  }
+  &__link {
+    font-weight: 700;
+    color: #000;
+    text-decoration: none;
   }
 }
 
@@ -80,6 +83,11 @@ export default {
       padding: 20px 0 0 0;
       border-top: 1px solid #ccc;
     }
+  }
+  &__link {
+    font-weight: 700;
+    color: #000;
+    text-decoration: none;
   }
 }
 </style>

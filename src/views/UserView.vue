@@ -6,7 +6,7 @@
 <script>
 import { mapState } from 'vuex'
 import UserTable from '@/components/UserTable'
-import bus from '@/utils/bus'
+import ListMixin from '../mixins/ListMixin'
 export default {
   name: 'UserView',
   computed: {
@@ -14,19 +14,10 @@ export default {
       user: state => state.hackerStore.user
     })
   },
-  created () {
-    const userName = this.$route.params.id
-    bus.$emit('start:spinner')
-    setTimeout(() => {
-      this.$store.dispatch('hackerStore/FETCH_USER', userName)
-        .then(() => {
-          bus.$emit('end:spinner')
-        }).catch(error => { console.error(error) })
-    }, 3000)
-  },
   components: {
     UserTable
-  }
+  },
+  mixins: [ListMixin]
 }
 </script>
 <style lang="scss" scoped>

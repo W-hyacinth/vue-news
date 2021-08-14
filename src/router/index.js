@@ -24,7 +24,7 @@ const router = new Router({
     },
     {
       path: '/ask/item',
-      name: 'ItemView',
+      name: 'item',
       component: () => import('@/views/ItemView.vue'),
       props: (route) => ({
         query: route.query.id
@@ -37,7 +37,7 @@ const router = new Router({
     },
     {
       path: '/user/:id',
-      name: 'UserView',
+      name: 'user',
       component: () => import('@/views/UserView.vue')
     }
   ]
@@ -54,6 +54,17 @@ router.beforeEach(async (to, from, next) => {
           next()
         }).catch(error => { console.error(error) })
       break
+    case 'user':
+      store.dispatch('hackerStore/FETCH_USER', to.params.id)
+        .then(() => {
+          next()
+        }).catch(error => { console.error(error) })
+      break
+    case 'item':
+      store.dispatch('hackerStore/FETCH_ITEMS', to.query.id)
+        .then(() => {
+          next()
+        }).catch(error => { console.error(error) })
   }
 })
 
