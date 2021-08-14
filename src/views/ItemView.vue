@@ -69,7 +69,7 @@ export default {
 
 .comment {
   &__article {
-    padding: 0 16px;
+    padding: 20px 16px;
     flex: 1 1 auto;
     background-color: #e9eaed;
   }
