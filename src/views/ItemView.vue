@@ -11,7 +11,7 @@
     </article>
     <article class="comment__article">
       <template v-if="fetchedItem.comments_count > 0">
-        <h3 class="comment__title">댓글 {{ fetchedItem.comments_count }}</h3>
+<!--        <h3 class="comment__title">댓글 {{ fetchedItem.comments_count }}</h3>-->
         <div v-for="(fetchedItem, index) in comments" :key="index+1" class="comment__item">
           <div class="comment__info">
             <router-link :to="`/user/${fetchedItem.user}`" class="comment__link">{{fetchedItem.user}}</router-link>
